@@ -4,4 +4,7 @@ module.exports = {
   env: {
     ENV: process.env.ENV,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 }
