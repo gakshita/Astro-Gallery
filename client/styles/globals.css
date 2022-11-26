@@ -14,7 +14,7 @@ html {
   --shadow: rgba(0, 0, 0, 0.79);
   --aqua: #34ceb7;
   --magenta: #b44aee;
-  --text-sizes-normal: 14px;
+  --text-sizes-normal: 15px;
   --grayBorder: #cecece;
   --white: #fff;
 }
@@ -100,7 +100,7 @@ html {
   }
 }
 .pd {
-  padding: 1.2rem;
+  padding: 1.5rem 1.8rem;
 }
 .rd {
   border-radius: 10px;
@@ -112,12 +112,12 @@ html {
   line-height: 30px;
   font-weight: 500;
   color: var(--black-light);
-  font-size: 0.87rem;
+  font-size: 0.9rem;
 }
 .txt-2 {
   color: var(--magenta);
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .btn {
@@ -169,10 +169,11 @@ html {
   outline: none;
   height: 36px;
   border: 1px solid var(--grayBorder);
-  margin-bottom: 10px;
-  padding: 0 10px;
+  margin-bottom: 15px;
+  padding: 20px 10px;
   color: var(--black);
   font-weight: 500;
+  font-weight: 400;
 }
 
 .btn-2 {
@@ -180,7 +181,7 @@ html {
   outline: none;
   height: 36px;
   border: 1px solid var(--grayBorder);
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   padding: 0 10px;
   color: var(--black-light);
   font-weight: 500;
