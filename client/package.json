@@ -6,6 +6,7 @@
     "start": "next build && next start"
   },
   "dependencies": {
+    "@solana/web3.js": "^1.66.2",
     "axios": "^0.25.0",
     "ethers": "^5.5.4",
     "next": "latest",

@@ -8,6 +8,7 @@ import { getCallData } from '../config'
 import { convertBigToNum, numberWithCommas, toWei } from '../helpers/numerics'
 import useABBContract, { useStakingContract } from '../hooks/useContract'
 import PulseLoader from 'react-spinners/PulseLoader'
+import validateSolAddress from '../helpers/validateSolana'
 
 interface IUserInfo {
   balance: string
@@ -37,7 +38,7 @@ const mint = () => {
           if (!solanaAddress || !stakingAmount || !duration) {
             return toast.error('Please provide all the details!')
           }
-          if (!ethers.utils.isAddress(solanaAddress)) {
+          if (!validateSolAddress(solanaAddress)) {
             return toast.error('Invalid solana address!')
           }
           let stakingAmountWei = toWei(stakingAmount)
