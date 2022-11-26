@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+* {
+  font-family: 'Roboto';
+}
+html {
+  --black: #000000;
+  --black-light: #0000009e;
+  --shadow: rgba(0, 0, 0, 0.79);
+  --aqua: #34ceb7;
+  --magenta: #b44aee;
+  --text-sizes-normal: 14px;
+  --grayBorder: #cecece;
+  --white: #fff;
+}
+
+.head {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  color: var(--black);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.nav {
+  padding: 20px;
+}
+.nav img {
+  height: 48px;
+}
+
+.connected {
+  box-sizing: border-box;
+  display: block;
+  height: 40px;
+  letter-spacing: 1px;
+  margin: 0 auto;
+  padding: 4px;
+  position: relative;
+  text-decoration: none;
+  z-index: 2;
+  border-radius: 10px;
+  min-width: 120px;
+  padding: 2px;
+  font-size: var(--text-sizes-normal);
+  color: var(--black);
+  font-weight: 600;
+  margin-top: 10px;
+  display: flex;
+}
+.connected span {
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  transition: background 0.5s ease;
+  width: 100%;
+  font-size: var(--text-sizes-normal);
+}
+.connected img {
+  height: 20px;
+  margin: auto;
+  margin-right: 8px;
+}
+
+.container {
+  margin: 5vh auto;
+  width: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+}
+
+.shadow {
+  box-shadow: 2px 4px 14px -9px var(--shadow);
+  -webkit-box-shadow: 2px 4px 14px -9px var(--shadow);
+  -moz-box-shadow: 2px 4px 14px -9px var(--shadow);
+}
+.flex-sb {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.cw-1 {
+  width: 50%;
+  max-width: 400px;
+}
+@media (max-width: 600px) {
+  .cw-1 {
+    width: 100%;
+  }
+}
+.pd {
+  padding: 1.2rem;
+}
+.rd {
+  border-radius: 10px;
+}
+.m-auto {
+  margin: auto;
+}
+.txt-1 {
+  line-height: 30px;
+  font-weight: 500;
+  color: var(--black-light);
+  font-size: 0.87rem;
+}
+.txt-2 {
+  color: var(--magenta);
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.btn {
+  background-image: linear-gradient(to right, var(--aqua), var(--magenta));
+  box-sizing: border-box;
+  display: block;
+  height: 40px;
+  letter-spacing: 1px;
+  margin: 0 auto;
+  padding: 4px;
+  position: relative;
+  text-decoration: none;
+  z-index: 2;
+  border-radius: 10px;
+  min-width: 120px;
+  padding: 2px;
+  font-size: var(--text-sizes-normal);
+  color: var(--magenta);
+  width: 100%;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  color: #fff;
+}
+
+.btn span {
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  transition: background 0.5s ease;
+  width: 100%;
+  font-size: var(--text-sizes-normal);
+}
+
+.btn:hover span {
+  background: var(--aqua);
+}
+.btn:hover {
+  background-image: none;
+}
+
+.material-textfield input {
+  border-radius: 10px;
+  outline: none;
+  height: 36px;
+  border: 1px solid var(--grayBorder);
+  margin-bottom: 10px;
+  padding: 0 10px;
+  color: var(--black);
+  font-weight: 500;
+}
+
+.btn-2 {
+  border-radius: 10px;
+  outline: none;
+  height: 36px;
+  border: 1px solid var(--grayBorder);
+  margin-bottom: 10px;
+  padding: 0 10px;
+  color: var(--black-light);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.5s ease;
+  display: flex;
+  font-size: var(--text-sizes-normal);
+  width: 32%;
+}
+.btn-2 span {
+  margin: auto;
+}
+.btn-2:hover {
+  background: var(--aqua);
+  border: none;
+  color: var(--white);
+}
+.btn-2-clicked {
+  background: var(--aqua);
+  border: none;
+  color: var(--white);
+}
+
+.txt-center {
+  text-align: center;
+}
+.highlight {
+  color: var(--black);
+  font-weight: 700;
+}
+
+.btn-3 {
+  width: 150px;
+  margin: inherit;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.btn-4 {
+  margin: inherit;
+  margin-top: auto;
+  border: 1px solid var(--grayBorder);
+  margin-bottom: auto;
+  padding: 10px;
+}
+
+.loading span {
+  background: var(--aqua);
+}
+.loading {
+  background-image: none;
+  display: flex;
+  color: var(--white);
+}
