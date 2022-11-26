@@ -14,11 +14,12 @@ const useEagerConnect = () => {
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: config.chainId }],
         })
-      } catch (error) {
-        await ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [config],
-        })
+      } catch (error: any) {
+        if (error.code == 4902)
+          await ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [config],
+          })
         console.log('Error connecting to metamask', error)
       }
     }
@@ -38,6 +39,7 @@ const useEagerConnect = () => {
   const checkIfWalletIsConnected = async () => {
     const { ethereum } = window
     if (ethereum) {
+      await ethereum.enable()
       await checkCorrectNetwork()
       const accounts = await ethereum.request({ method: 'eth_accounts' })
       console.log(accounts)
