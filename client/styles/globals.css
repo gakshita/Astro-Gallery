@@ -15,6 +15,7 @@ html {
   --aqua: #34ceb7;
   --magenta: #b44aee;
   --text-sizes-normal: 15px;
+  --text-sizes-small: 12px;
   --grayBorder: #cecece;
   --white: #fff;
 }
@@ -26,6 +27,15 @@ html {
   color: var(--black);
   text-align: center;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+.head img {
+  height: 45px;
+}
+.head span {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 .nav {
   padding: 20px;
@@ -92,7 +102,7 @@ html {
 }
 .cw-1 {
   width: 50%;
-  max-width: 400px;
+  max-width: 440px;
 }
 @media (max-width: 600px) {
   .cw-1 {
@@ -101,6 +111,11 @@ html {
 }
 .pd {
   padding: 1.5rem 1.8rem;
+}
+@media (max-width: 600px) {
+  .pd {
+    padding: 1.5rem 1rem;
+  }
 }
 .rd {
   border-radius: 10px;
@@ -179,10 +194,9 @@ html {
 .btn-2 {
   border-radius: 10px;
   outline: none;
-  height: 36px;
   border: 1px solid var(--grayBorder);
   margin-bottom: 15px;
-  padding: 0 10px;
+  padding: 5px 10px;
   color: var(--black-light);
   font-weight: 500;
   cursor: pointer;
@@ -190,6 +204,8 @@ html {
   display: flex;
   font-size: var(--text-sizes-normal);
   width: 32%;
+  display: flex;
+  flex-direction: column;
 }
 .btn-2 span {
   margin: auto;
@@ -203,6 +219,10 @@ html {
   background: var(--aqua);
   border: none;
   color: var(--white);
+}
+.apy {
+  font-size: var(--text-sizes-small);
+  font-weight: 500;
 }
 
 .txt-center {

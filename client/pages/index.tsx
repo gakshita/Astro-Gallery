@@ -155,7 +155,10 @@ const mint = () => {
       ) : ( */}
       <div className="container">
         {/* {account} */}
-        <div className="head">Stake ABB</div>
+        <div className="head">
+          <img src="/coin.png"></img>
+          <span>Stake ABB</span>
+        </div>
         <div className="flex-sb pd cw-1 rd m-auto shadow">
           <div>
             <div className="txt-1 ">Available to stake</div>
@@ -197,13 +200,14 @@ const mint = () => {
         </div>
         <div className="pd cw-1 rd m-auto flex-col shadow">
           <div className="material-textfield flex-col">
-            <label className="txt-1 ">Duration of staking</label>
+            <label className="txt-1 ">Duration of staking </label>
             <div className="flex-sb">
               <a
                 className={`btn-2 ${duration == 30 && 'btn-2-clicked'}`}
                 onClick={() => setDuration(30)}
               >
                 <span>30 days</span>
+                <span className="apy">5% APY</span>
               </a>
               <a
                 className={`btn-2 ${duration == 60 && 'btn-2-clicked'}`}
@@ -211,6 +215,7 @@ const mint = () => {
               >
                 {' '}
                 <span>60 days</span>
+                <span className="apy">10% APY</span>
               </a>
               <a
                 className={`btn-2 ${duration == 90 && 'btn-2-clicked'}`}
@@ -218,6 +223,7 @@ const mint = () => {
               >
                 {' '}
                 <span>90 days</span>
+                <span className="apy">15% APY</span>
               </a>
             </div>
           </div>
