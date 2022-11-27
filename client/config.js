@@ -4,7 +4,7 @@ import Staking from './ABI/Staking.json'
 export const network_config = {
   testnet: {
     chainId: '0x61',
-    rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+    rpcUrls: ['https://bsctestapi.terminet.io/rpc'],
     chainName: 'Binance Test Network',
     nativeCurrency: {
       name: 'BNB',
