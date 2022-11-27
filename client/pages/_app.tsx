@@ -6,21 +6,22 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <title>Staking</title>
         <meta property="og:title" content="Buffer" key="title" />
         <meta
           property="og:image"
-          content="/android-chrome-192x192.png"
+          content="https://astrogallery.io/ICONO.png"
           key="image"
         />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="icon" href="/favicon-16x16.png" color="#5bbad5" />
+        <link
+          rel="icon"
+          href="https://astrogallery.io/ICONO.png"
+          color="#5bbad5"
+        />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        <meta
-          property="og:description"
-          key="description"
-          content="Buffer is an on-chain non-custodial peer-to-pool options trading protocol"
-        />
+        <meta property="og:description" key="description" content="" />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"

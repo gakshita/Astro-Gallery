@@ -74,7 +74,7 @@ const mint = () => {
             userInfo?.redeemableAmount &&
             parseFloat(userInfo?.redeemableAmount) > 0
           ) {
-            tx = await staking.withdraw(account)
+            tx = await staking.withdraw()
             await tx.wait()
             toast.success('Redeemed successfully!')
           } else {

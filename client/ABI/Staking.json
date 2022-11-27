@@ -33,9 +33,9 @@
             },
             {
                 "indexed": false,
-                "internalType": "address",
+                "internalType": "string",
                 "name": "solanaAddress",
-                "type": "address"
+                "type": "string"
             }
         ],
         "name": "Stake",
@@ -70,9 +70,9 @@
             },
             {
                 "indexed": false,
-                "internalType": "address",
+                "internalType": "string",
                 "name": "solanaAddress",
-                "type": "address"
+                "type": "string"
             },
             {
                 "indexed": false,
@@ -178,9 +178,9 @@
                 "type": "uint256"
             },
             {
-                "internalType": "address",
+                "internalType": "string",
                 "name": "solanaAddress",
-                "type": "address"
+                "type": "string"
             }
         ],
         "name": "stake",
@@ -201,6 +201,11 @@
             {
                 "internalType": "uint256",
                 "name": "withdrawnAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "startIndex",
                 "type": "uint256"
             }
         ],
