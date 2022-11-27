@@ -9,7 +9,8 @@ import { convertBigToNum, numberWithCommas, toWei } from '../helpers/numerics'
 import useABBContract, { useStakingContract } from '../hooks/useContract'
 import PulseLoader from 'react-spinners/PulseLoader'
 import validateSolAddress from '../helpers/validateSolana'
-import ReactTooltip from 'react-tooltip'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
 
 interface IUserInfo {
   balance: string
@@ -158,12 +159,28 @@ const mint = () => {
           <div>
             <div className="txt-1 ">Accured Rewards</div>
             <div className="txt-2 ">
-              {' '}
-              {account && userInfo
-                ? `${numberWithCommas(
-                    parseFloat(userInfo.accuredAmount).toFixed(3)
-                  )} ABB`
-                : '-'}
+              {account && userInfo ? (
+                <OverlayTrigger
+                  placement="top"
+                  overlay={
+                    <Tooltip className="tooltip shadow">
+                      {parseFloat(userInfo && userInfo.accuredAmount).toFixed(
+                        8
+                      )}{' '}
+                      ABB
+                    </Tooltip>
+                  }
+                >
+                  <span className="u">
+                    {numberWithCommas(
+                      parseFloat(userInfo.accuredAmount).toFixed(3)
+                    )}{' '}
+                    ABB
+                  </span>
+                </OverlayTrigger>
+              ) : (
+                '-'
+              )}
             </div>
           </div>
         </div>
@@ -215,14 +232,22 @@ const mint = () => {
             />
           </div>
           {rewards ? (
-            <label className="txt-1 txt-center">
-              You will get{' '}
-              <span className="highlight">
-                {parseFloat(rewards.toString()).toFixed(3)} ABB
-              </span>
-            </label>
+            <OverlayTrigger
+              placement="top"
+              overlay={
+                <Tooltip className="tooltip shadow">
+                  {parseFloat(rewards.toString()).toFixed(8)} ABB
+                </Tooltip>
+              }
+            >
+              <label className="txt-1 txt-center">
+                You will get{' '}
+                <span className="highlight u">
+                  {parseFloat(rewards.toString()).toFixed(3)} ABB
+                </span>
+              </label>
+            </OverlayTrigger>
           ) : null}
-
           {account ? (
             <>
               <a

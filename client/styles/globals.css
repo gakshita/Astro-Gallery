@@ -235,3 +235,14 @@ html {
   display: flex;
   color: var(--white);
 }
+
+.tooltip {
+  background-color: var(--white);
+  padding: 10px;
+  color: var(--black-light);
+  font-weight: 500;
+}
+.u {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
