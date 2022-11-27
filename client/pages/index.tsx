@@ -287,7 +287,7 @@ const mint = () => {
                       ? `${numberWithCommas(
                           parseFloat(userInfo.redeemableAmount).toFixed(2)
                         )} ABB`
-                      : '-'}{' '}
+                      : ''}{' '}
                   </span>
                 )}
                 <ToastContainer />
