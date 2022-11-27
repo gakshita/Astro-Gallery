@@ -129,6 +129,8 @@ const mint = () => {
 
   return (
     <div className="">
+      <ToastContainer />
+
       <div className="nav flex-sb shadow">
         <img src="https://astrogallery.io/fd0447e132932c75c366.png"></img>
         {!account ? (
@@ -142,6 +144,14 @@ const mint = () => {
           </div>
         )}
       </div>
+      {/* {!userInfo && account ? (
+        <div className="h-100 container">
+          <div className="loading">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      ) : ( */}
       <div className="container">
         {/* {account} */}
         <div className="head">Stake ABB</div>
@@ -290,7 +300,6 @@ const mint = () => {
                       : ''}{' '}
                   </span>
                 )}
-                <ToastContainer />
               </a>
             </>
           ) : (
@@ -300,6 +309,7 @@ const mint = () => {
           )}
         </div>
       </div>
+      {/* )} */}
     </div>
   )
 }

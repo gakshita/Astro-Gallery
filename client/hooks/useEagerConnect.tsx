@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { network_config } from '../config'
+import { ToastContainer, toast } from 'react-toastify'
 declare var window: any
 
 const useEagerConnect = () => {
@@ -23,6 +24,8 @@ const useEagerConnect = () => {
           })
         console.log('Error connecting to metamask', error)
       }
+    } else {
+      toast.error('No wallet found')
     }
   }
 
