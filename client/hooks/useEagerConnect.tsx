@@ -9,6 +9,7 @@ const useEagerConnect = () => {
     const { ethereum } = window
     const config = network_config[process.env.ENV]
     if (ethereum) {
+      await ethereum.enable()
       try {
         await ethereum.request({
           method: 'wallet_switchEthereumChain',
