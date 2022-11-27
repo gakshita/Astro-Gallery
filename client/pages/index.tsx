@@ -53,6 +53,7 @@ const mint = () => {
             ) {
               tx = await ABB.approve(staking?.address, stakingAmountWei)
               await tx.wait()
+              toast.success('Approved successfully!')
             }
             tx = await staking.stake(stakingAmountWei, duration, solanaAddress)
             await tx.wait()
@@ -274,7 +275,7 @@ const mint = () => {
                     data-testid="loader"
                   />
                 ) : (
-                  <span>Stake ABB</span>
+                  <span>Approve & Stake ABB</span>
                 )}
               </a>
               <a
