@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Staking</title>
-        <meta property="og:title" content="Buffer" key="title" />
+        <meta property="og:title" content="AstroGallery" key="title" />
         <meta
           property="og:image"
           content="https://astrogallery.io/ICONO.png"
