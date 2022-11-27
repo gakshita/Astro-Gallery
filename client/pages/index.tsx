@@ -9,6 +9,7 @@ import { convertBigToNum, numberWithCommas, toWei } from '../helpers/numerics'
 import useABBContract, { useStakingContract } from '../hooks/useContract'
 import PulseLoader from 'react-spinners/PulseLoader'
 import validateSolAddress from '../helpers/validateSolana'
+import ReactTooltip from 'react-tooltip'
 
 interface IUserInfo {
   balance: string
@@ -160,7 +161,7 @@ const mint = () => {
               {' '}
               {account && userInfo
                 ? `${numberWithCommas(
-                    parseFloat(userInfo.accuredAmount).toFixed(4)
+                    parseFloat(userInfo.accuredAmount).toFixed(3)
                   )} ABB`
                 : '-'}
             </div>
@@ -217,7 +218,7 @@ const mint = () => {
             <label className="txt-1 txt-center">
               You will get{' '}
               <span className="highlight">
-                {parseFloat(rewards.toString()).toFixed(4)} ABB
+                {parseFloat(rewards.toString()).toFixed(3)} ABB
               </span>
             </label>
           ) : null}
