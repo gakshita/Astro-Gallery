@@ -270,7 +270,7 @@ h1 {
   font-size: 64px;
   transition: 0.5s;
 }
-.loading {
+/* .loading {
   display: inline-block;
   position: relative;
   width: 64px;
@@ -305,4 +305,4 @@ h1 {
     height: 58px;
     opacity: 0;
   }
-}
+} */
