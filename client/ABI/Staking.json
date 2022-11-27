@@ -3,7 +3,7 @@
         "inputs": [
             {
                 "internalType": "contract ERC20",
-                "name": "_tokenX",
+                "name": "token",
                 "type": "address"
             }
         ],
@@ -36,6 +36,18 @@
                 "internalType": "string",
                 "name": "solanaAddress",
                 "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "currentTime",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "unlockTime",
+                "type": "uint256"
             }
         ],
         "name": "Stake",
@@ -55,34 +67,23 @@
                 "internalType": "uint256",
                 "name": "amount",
                 "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "lockUpPeriod",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "depositTimestamp",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "solanaAddress",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "reward",
-                "type": "uint256"
             }
         ],
         "name": "Withdraw",
         "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "ABB",
+        "outputs": [
+            {
+                "internalType": "contract ERC20",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
     },
     {
         "inputs": [
@@ -139,8 +140,54 @@
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "tokens",
+                "name": "amountToWithdraw",
                 "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "getUserStakedAmounts",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "depositTimestamp",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "lockUpPeriod",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "solanaAddress",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "nextIndex",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct StakingABB.StakedAmount[]",
+                "name": "stakedAmounts",
+                "type": "tuple[]"
             }
         ],
         "stateMutability": "view",
@@ -200,26 +247,13 @@
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "withdrawnAmount",
+                "name": "collectedRewards",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
                 "name": "startIndex",
                 "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "tokenX",
-        "outputs": [
-            {
-                "internalType": "contract ERC20",
-                "name": "",
-                "type": "address"
             }
         ],
         "stateMutability": "view",

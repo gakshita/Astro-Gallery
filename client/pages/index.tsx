@@ -160,7 +160,7 @@ const mint = () => {
               {' '}
               {account && userInfo
                 ? `${numberWithCommas(
-                    parseFloat(userInfo.accuredAmount).toFixed(2)
+                    parseFloat(userInfo.accuredAmount).toFixed(4)
                   )} ABB`
                 : '-'}
             </div>
@@ -217,7 +217,7 @@ const mint = () => {
             <label className="txt-1 txt-center">
               You will get{' '}
               <span className="highlight">
-                {parseFloat(rewards.toString()).toFixed(2)} ABB
+                {parseFloat(rewards.toString()).toFixed(4)} ABB
               </span>
             </label>
           ) : null}
