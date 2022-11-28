@@ -134,16 +134,21 @@ const mint = () => {
 
       <div className="nav flex-sb shadow">
         <img src="https://astrogallery.io/fd0447e132932c75c366.png"></img>
-        {!account ? (
-          <a className="btn btn-3" href="#" onClick={connectWallet}>
-            <span>Connect Wallet</span>
+        <div className="flex">
+          <a className="txt-center github flex" href="" target="_blank">
+            Github
           </a>
-        ) : (
-          <div className="connected btn-4">
-            <img src="/Wallet.png"></img>
-            <span>{`${account.slice(0, 4)}..${account.slice(-4)}`}</span>
-          </div>
-        )}
+          {!account ? (
+            <a className="btn btn-3" href="#" onClick={connectWallet}>
+              <span>Connect Wallet</span>
+            </a>
+          ) : (
+            <div className="connected btn-4">
+              <img src="/Wallet.png"></img>
+              <span>{`${account.slice(0, 4)}..${account.slice(-4)}`}</span>
+            </div>
+          )}
+        </div>
       </div>
       {/* {!userInfo && account ? (
         <div className="h-100 container">

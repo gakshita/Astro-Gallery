@@ -43,7 +43,17 @@ html {
 .nav img {
   height: 48px;
 }
-
+.nav .github {
+  margin: auto;
+  margin-right: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .github {
+    display: none;
+  }
+}
 .connected {
   box-sizing: border-box;
   display: block;
@@ -266,17 +276,6 @@ html {
   text-decoration: underline;
   text-decoration-style: dotted;
 }
-
-/* body {
-  font-family: 'Hind Guntur', sans-serif;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-  overflow: hidden;
-} */
 
 @keyframes bg {
   0% {
