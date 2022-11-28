@@ -16,7 +16,7 @@ interface IUserInfo {
   balance: string
   allowance: string
   redeemableAmount: string
-  accuredAmount: string
+  accruedAmount: string
 }
 
 const mint = () => {
@@ -92,13 +92,13 @@ const mint = () => {
 
   const updateStats = async () => {
     var result = await multicallv2(getCallData(account))
-    let [balance, allowance, redeemableAmount, accuredAmount] =
+    let [balance, allowance, redeemableAmount, accruedAmount] =
       convertBigToNum(result)
     setUserInfo({
       balance,
       allowance,
       redeemableAmount,
-      accuredAmount,
+      accruedAmount,
     })
   }
 
@@ -171,14 +171,14 @@ const mint = () => {
             </div>
           </div>
           <div>
-            <div className="txt-1 ">Accured Rewards</div>
+            <div className="txt-1 ">Accrued Rewards</div>
             <div className="txt-2 ">
               {account && userInfo ? (
                 <OverlayTrigger
                   placement="top"
                   overlay={
                     <Tooltip className="tooltip shadow">
-                      {parseFloat(userInfo && userInfo.accuredAmount).toFixed(
+                      {parseFloat(userInfo && userInfo.accruedAmount).toFixed(
                         8
                       )}{' '}
                       ABB
@@ -187,7 +187,7 @@ const mint = () => {
                 >
                   <span className="u">
                     {numberWithCommas(
-                      parseFloat(userInfo.accuredAmount).toFixed(3)
+                      parseFloat(userInfo.accruedAmount).toFixed(3)
                     )}{' '}
                     ABB
                   </span>
