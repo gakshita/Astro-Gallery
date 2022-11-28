@@ -33,9 +33,8 @@ const useEagerConnect = () => {
     const { ethereum } = window
     let chainId = await ethereum.request({ method: 'eth_chainId' })
     console.log('Connected to chain:' + chainId)
-    const env = 'testnet'
 
-    if (chainId !== '0x61') {
+    if (chainId !== network_config[process.env.ENV].chainId) {
       await connectWallet()
     }
   }

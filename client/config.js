@@ -17,7 +17,7 @@ export const network_config = {
     chainId: '0x38',
     rpcUrls: ['https://bsc-dataseed1.binance.org/'],
     chainName: `Binance Smart Chain Mainnet`,
-    nativeAsset: {
+    nativeCurrency: {
       name: 'BNB',
       symbol: 'BNB',
       decimals: 18,
