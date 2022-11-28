@@ -200,7 +200,7 @@ const mint = () => {
         </div>
         <div className="pd cw-1 rd m-auto flex-col shadow">
           <div className="material-textfield flex-col">
-            <label className="txt-1 ">Duration of staking </label>
+            <label className="txt-1 ">Duration of Staking </label>
             <div className="flex-sb">
               <a
                 className={`btn-2 ${duration == 30 && 'btn-2-clicked'}`}
@@ -239,7 +239,7 @@ const mint = () => {
             />
           </div>
           <div className="material-textfield flex-col">
-            <label className="txt-1 ">Solana address</label>
+            <label className="txt-1 ">Solana Address</label>
             <input
               placeholder=" "
               className="txt-2 "
