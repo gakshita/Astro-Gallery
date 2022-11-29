@@ -24,7 +24,7 @@ const mint = () => {
   const [rewards, setRewards] = useState<string | null>(null)
   const [duration, setDuration] = useState<number | null>(null)
   const [stakingAmount, setStakingAmount] = useState<number | null>(null)
-  const [solanaAddress, setSolanaAddress] = useState<string>('')
+  const [solanaAddress, setSolanaAddress] = useState<string>()
   const [userInfo, setUserInfo] = useState<IUserInfo | null>(null)
 
   const { account, connectWallet } = useEagerConnect()
@@ -44,6 +44,12 @@ const mint = () => {
             return toast.error('Invalid solana address!')
           }
           let stakingAmountWei = toWei(stakingAmount)
+          if (
+            userInfo?.balance &&
+            parseFloat(userInfo?.balance) < stakingAmount
+          ) {
+            return toast.error("You don't enough amount!")
+          }
           console.log('args', { stakingAmountWei, duration, solanaAddress })
           try {
             setLoadingState(1)
@@ -128,6 +134,9 @@ const mint = () => {
     if (account) getReward()
   }, [stakingAmount, duration])
 
+  function calc(num: number) {
+    if (num) return num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
+  }
   return (
     <div className="">
       <ToastContainer />
@@ -169,9 +178,7 @@ const mint = () => {
             <div className="txt-1 ">Available to stake</div>
             <div className="txt-2 ">
               {account && userInfo
-                ? `${numberWithCommas(
-                    parseFloat(userInfo.balance).toFixed(2)
-                  )} ABB`
+                ? `${calc(parseFloat(userInfo.balance))} ABB`
                 : '-'}
             </div>
           </div>
