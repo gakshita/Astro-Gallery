@@ -136,6 +136,7 @@ const mint = () => {
 
   function calc(num: number) {
     if (num) return num.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]
+    else return num
   }
   return (
     <div className="">
