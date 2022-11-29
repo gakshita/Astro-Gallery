@@ -48,7 +48,7 @@ const mint = () => {
             userInfo?.balance &&
             parseFloat(userInfo?.balance) < stakingAmount
           ) {
-            return toast.error("You don't enough amount!")
+            return toast.error("You don't have enough tokens!")
           }
           console.log('args', { stakingAmountWei, duration, solanaAddress })
           try {
