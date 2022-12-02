@@ -17,6 +17,8 @@ interface IUserInfo {
   allowance: string
   redeemableAmount: string
   accruedAmount: string
+  claimedAmount: string
+  stakedAmount: string
 }
 
 const mint = () => {
@@ -50,7 +52,6 @@ const mint = () => {
           ) {
             return toast.error("You don't have enough tokens!")
           }
-          console.log('args', { stakingAmountWei, duration, solanaAddress })
           try {
             setLoadingState(1)
             if (
@@ -100,11 +101,43 @@ const mint = () => {
     var result = await multicallv2(getCallData(account))
     let [balance, allowance, redeemableAmount, accruedAmount] =
       convertBigToNum(result)
+
+    const axios = require('axios')
+    const { utils, BigNumber } = require('ethers')
+    let claimedAmount
+    let stakedAmount
+    let response = await axios.post(
+      'https://api.thegraph.com/subgraphs/name/ummehanizaki10/staking-abb',
+      {
+        query:
+          'query UserStakingData($account: Bytes!) {\n  currentUserPositions(where: {id: $account}) {\n    claimedAmount\n    stakedAmount\n    id\n  }\n}',
+        variables: {
+          account: account,
+        },
+        operationName: 'UserStakingData',
+        extensions: {
+          headers: null,
+        },
+      },
+      {
+        headers: null,
+      }
+    )
+    response = response.data.data.currentUserPositions[0]
+      ? response.data.data.currentUserPositions[0]
+      : { claimedAmount: '0', stakedAmount: '0' }
+    claimedAmount = utils.formatEther(response.claimedAmount)
+    claimedAmount = (+claimedAmount).toFixed(3)
+    stakedAmount = utils.formatEther(response.stakedAmount)
+    stakedAmount = (+stakedAmount).toFixed(3)
+
     setUserInfo({
       balance,
       allowance,
       redeemableAmount,
       accruedAmount,
+      claimedAmount,
+      stakedAmount,
     })
   }
 
@@ -208,6 +241,24 @@ const mint = () => {
               ) : (
                 '-'
               )}
+            </div>
+          </div>
+        </div>
+        <div className="flex-sb pd cw-1 rd m-auto shadow">
+          <div>
+            <div className="txt-1 ">Current Staked</div>
+            <div className="txt-2 ">
+              {account && userInfo
+                ? `${calc(parseFloat(userInfo.stakedAmount))} ABB`
+                : '-'}
+            </div>
+          </div>
+          <div>
+            <div className="txt-1 ">Total Redeemed</div>
+            <div className="txt-2 ">
+              {account && userInfo
+                ? `${calc(parseFloat(userInfo.claimedAmount))} ABB`
+                : '-'}
             </div>
           </div>
         </div>
