@@ -6,6 +6,8 @@
     "start": "next build && next start"
   },
   "dependencies": {
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.16",
     "@solana/web3.js": "^1.66.2",
     "axios": "^0.25.0",
     "ethers": "^5.5.4",
@@ -14,6 +16,7 @@
     "react-bootstrap": "^2.6.0",
     "react-dom": "^17.0.2",
     "react-spinners": "^0.13.6",
+    "react-super-responsive-table": "^5.2.1",
     "react-toastify": "^9.1.1"
   },
   "devDependencies": {

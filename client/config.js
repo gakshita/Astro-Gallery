@@ -29,7 +29,7 @@ export const ALL_CONTRACTS = {
   testnet: {
     ABB: '0xA167211Aa0DcD4453Bc7D05d5CA0667De25fa2f6',
     Multicall: '0x6e5BB1a5Ad6F68A8D7D6A5e47750eC15773d6042',
-    Staking: '0xD8907242BE96EB5d6f378D311eE0dD058181088f',
+    Staking: '0x9489823323a535528aB1c159a1560F5d89E85A6A',
   },
   mainnet: {
     ABB: '0x277aE79C42c859cA858d5A92C22222C8b65c6D94',
@@ -63,6 +63,19 @@ export const getCallData = (account) => {
       address: contracts.Staking,
       abi: Staking,
       name: 'calculateUserReward',
+      params: [account],
+    },
+    {
+      address: contracts.Staking,
+      abi: Staking,
+      name: 'getUserStakedAmounts',
+      params: [account],
+    },
+
+    {
+      address: contracts.Staking,
+      abi: Staking,
+      name: 'stakeDetailPerUser',
       params: [account],
     },
   ]

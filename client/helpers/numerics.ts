@@ -23,3 +23,28 @@ export const toWei = (value: number) => {
 export const numberWithCommas = (x: any) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
+
+export const getUserStakedData = (userArray: any, extras: any) => {
+  let startIndex = extras.startIndex.toNumber()
+  let processesUserArray: any[] = []
+
+  userArray.stakedAmounts.forEach((value: any, key: number) => {
+    processesUserArray.push({
+      amount: ethers.utils.formatEther(
+        ethers.utils.formatUnits(value.amount._hex, 0)
+      ),
+      depositTimestamp: value.depositTimestamp.toNumber(),
+      lockUpPeriod: value.lockUpPeriod.toNumber(),
+      nextIndex: value.nextIndex.toNumber(),
+      solanaAddress: value.solanaAddress,
+      hasClaimed: true,
+    })
+  })
+
+  let n = startIndex
+  while (n < processesUserArray.length) {
+    processesUserArray[n].hasClaimed = false
+    n = processesUserArray[n].nextIndex
+  }
+  return processesUserArray
+}

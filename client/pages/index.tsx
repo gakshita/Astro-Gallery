@@ -5,18 +5,26 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { multicallv2 } from '../helpers/multiContract'
 import { getCallData } from '../config'
-import { convertBigToNum, numberWithCommas, toWei } from '../helpers/numerics'
+import {
+  convertBigToNum,
+  getUserStakedData,
+  numberWithCommas,
+  toWei,
+} from '../helpers/numerics'
 import useABBContract, { useStakingContract } from '../hooks/useContract'
 import PulseLoader from 'react-spinners/PulseLoader'
 import validateSolAddress from '../helpers/validateSolana'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
+import BasicTable from '../components/Table/table'
+import { Paper } from '@mui/material'
 
 interface IUserInfo {
   balance: string
   allowance: string
   redeemableAmount: string
   accruedAmount: string
+  processesUserArray: any[]
 }
 
 const mint = () => {
@@ -98,13 +106,17 @@ const mint = () => {
 
   const updateStats = async () => {
     var result = await multicallv2(getCallData(account))
-    let [balance, allowance, redeemableAmount, accruedAmount] =
-      convertBigToNum(result)
+    let [balance, allowance, redeemableAmount, accruedAmount] = convertBigToNum(
+      result.slice(0, -1)
+    )
+    let processesUserArray = getUserStakedData(result[4], result[5])
+    console.log({ processesUserArray })
     setUserInfo({
       balance,
       allowance,
       redeemableAmount,
       accruedAmount,
+      processesUserArray,
     })
   }
 
@@ -139,9 +151,8 @@ const mint = () => {
     else return num
   }
   return (
-    <div className="">
+    <div className="main">
       <ToastContainer />
-
       <div className="nav flex-sb shadow">
         <img src="https://astrogallery.io/fd0447e132932c75c366.png"></img>
         <div className="flex">
@@ -160,176 +171,212 @@ const mint = () => {
           )}
         </div>
       </div>
-      {/* {!userInfo && account ? (
-        <div className="h-100 container">
-          <div className="loading">
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-      ) : ( */}
       <div className="container">
         {/* {account} */}
         <div className="head">
           <img src="/coin.png"></img>
           <span>Stake ABB</span>
         </div>
-        <div className="flex-sb pd cw-1 rd m-auto shadow">
-          <div>
-            <div className="txt-1 ">Available to stake</div>
-            <div className="txt-2 ">
-              {account && userInfo
-                ? `${calc(parseFloat(userInfo.balance))} ABB`
-                : '-'}
+        <div className="adjustable flex">
+          {/* {account && userInfo && (
+            <BasicTable data={userInfo.processesUserArray} />
+          )} */}
+          <div className="cw-1 flex-col">
+            <div className="flex-sb pd cw-1 rd m-auto shadow">
+              <div>
+                <div className="txt-1 ">Available to stake</div>
+                <div className="txt-2 ">
+                  {account && userInfo
+                    ? `${calc(parseFloat(userInfo.balance))} ABB`
+                    : '-'}
+                </div>
+              </div>
+              <div>
+                <div className="txt-1 ">Accrued Rewards</div>
+                <div className="txt-2 ">
+                  {account && userInfo ? (
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={
+                        <Tooltip className="tooltip shadow">
+                          {parseFloat(
+                            userInfo && userInfo.accruedAmount
+                          ).toFixed(8)}{' '}
+                          ABB
+                        </Tooltip>
+                      }
+                    >
+                      <span className="u">
+                        {numberWithCommas(
+                          parseFloat(userInfo.accruedAmount).toFixed(3)
+                        )}{' '}
+                        ABB
+                      </span>
+                    </OverlayTrigger>
+                  ) : (
+                    '-'
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-          <div>
-            <div className="txt-1 ">Accrued Rewards</div>
-            <div className="txt-2 ">
-              {account && userInfo ? (
+            <div className="flex-sb pd cw-1 rd m-auto shadow">
+              <div>
+                <div className="txt-1 ">Available to stake</div>
+                <div className="txt-2 ">
+                  {account && userInfo
+                    ? `${calc(parseFloat(userInfo.balance))} ABB`
+                    : '-'}
+                </div>
+              </div>
+              <div>
+                <div className="txt-1 ">Accrued Rewards</div>
+                <div className="txt-2 ">
+                  {account && userInfo ? (
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={
+                        <Tooltip className="tooltip shadow">
+                          {parseFloat(
+                            userInfo && userInfo.accruedAmount
+                          ).toFixed(8)}{' '}
+                          ABB
+                        </Tooltip>
+                      }
+                    >
+                      <span className="u">
+                        {numberWithCommas(
+                          parseFloat(userInfo.accruedAmount).toFixed(3)
+                        )}{' '}
+                        ABB
+                      </span>
+                    </OverlayTrigger>
+                  ) : (
+                    '-'
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="pd cw-1 rd max m-auto flex-col shadow">
+              <div className="material-textfield flex-col">
+                <label className="txt-1 ">Duration of Staking </label>
+                <div className="flex-sb">
+                  <a
+                    className={`btn-2 ${duration == 30 && 'btn-2-clicked'}`}
+                    onClick={() => setDuration(30)}
+                  >
+                    <span>30 days</span>
+                    <span className="apy">5% APY</span>
+                  </a>
+                  <a
+                    className={`btn-2 ${duration == 60 && 'btn-2-clicked'}`}
+                    onClick={() => setDuration(60)}
+                  >
+                    {' '}
+                    <span>60 days</span>
+                    <span className="apy">10% APY</span>
+                  </a>
+                  <a
+                    className={`btn-2 ${duration == 90 && 'btn-2-clicked'}`}
+                    onClick={() => setDuration(90)}
+                  >
+                    {' '}
+                    <span>90 days</span>
+                    <span className="apy">15% APY</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="material-textfield flex-col">
+                <label className="txt-1 ">Stake Amount</label>
+                <input
+                  placeholder=""
+                  className="txt-2 "
+                  type="number"
+                  onChange={(e) => setStakingAmount(parseFloat(e.target.value))}
+                  value={stakingAmount || ''}
+                />
+              </div>
+              <div className="material-textfield flex-col">
+                <label className="txt-1 ">Solana Address</label>
+                <input
+                  placeholder=" "
+                  className="txt-2 "
+                  type="text"
+                  onChange={(e) => setSolanaAddress(e.target.value)}
+                  value={solanaAddress}
+                />
+              </div>
+              {rewards ? (
                 <OverlayTrigger
                   placement="top"
                   overlay={
                     <Tooltip className="tooltip shadow">
-                      {parseFloat(userInfo && userInfo.accruedAmount).toFixed(
-                        8
-                      )}{' '}
-                      ABB
+                      {parseFloat(rewards.toString()).toFixed(8)} ABB
                     </Tooltip>
                   }
                 >
-                  <span className="u">
-                    {numberWithCommas(
-                      parseFloat(userInfo.accruedAmount).toFixed(3)
-                    )}{' '}
-                    ABB
-                  </span>
+                  <label className="txt-1 txt-center">
+                    You will get{' '}
+                    <span className="highlight u">
+                      {parseFloat(rewards.toString()).toFixed(3)} ABB
+                    </span>
+                  </label>
                 </OverlayTrigger>
+              ) : null}
+              {account ? (
+                <>
+                  <a
+                    className={`btn ${loadingState == 1 && 'loading'}`}
+                    href="#"
+                    onClick={() => performAction('stake')}
+                  >
+                    {loadingState == 1 ? (
+                      <PulseLoader
+                        color={'#fff'}
+                        loading={true}
+                        size={12}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                      />
+                    ) : (
+                      <span>Approve & Stake ABB</span>
+                    )}
+                  </a>
+                  <a
+                    className={`btn ${loadingState == 2 && 'loading'}`}
+                    href="#"
+                    onClick={() => performAction('redeem')}
+                  >
+                    {loadingState == 2 ? (
+                      <PulseLoader
+                        color={'#fff'}
+                        loading={true}
+                        size={12}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                      />
+                    ) : (
+                      <span>
+                        Redeem{' '}
+                        {account && userInfo
+                          ? `${numberWithCommas(
+                              parseFloat(userInfo.redeemableAmount).toFixed(2)
+                            )} ABB`
+                          : ''}{' '}
+                      </span>
+                    )}
+                  </a>
+                </>
               ) : (
-                '-'
+                <a className="btn" href="#" onClick={connectWallet}>
+                  <span>Connect Wallet</span>
+                </a>
               )}
             </div>
           </div>
         </div>
-        <div className="pd cw-1 rd m-auto flex-col shadow">
-          <div className="material-textfield flex-col">
-            <label className="txt-1 ">Duration of Staking </label>
-            <div className="flex-sb">
-              <a
-                className={`btn-2 ${duration == 30 && 'btn-2-clicked'}`}
-                onClick={() => setDuration(30)}
-              >
-                <span>30 days</span>
-                <span className="apy">5% APY</span>
-              </a>
-              <a
-                className={`btn-2 ${duration == 60 && 'btn-2-clicked'}`}
-                onClick={() => setDuration(60)}
-              >
-                {' '}
-                <span>60 days</span>
-                <span className="apy">10% APY</span>
-              </a>
-              <a
-                className={`btn-2 ${duration == 90 && 'btn-2-clicked'}`}
-                onClick={() => setDuration(90)}
-              >
-                {' '}
-                <span>90 days</span>
-                <span className="apy">15% APY</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="material-textfield flex-col">
-            <label className="txt-1 ">Stake Amount</label>
-            <input
-              placeholder=""
-              className="txt-2 "
-              type="number"
-              onChange={(e) => setStakingAmount(parseFloat(e.target.value))}
-              value={stakingAmount || ''}
-            />
-          </div>
-          <div className="material-textfield flex-col">
-            <label className="txt-1 ">Solana Address</label>
-            <input
-              placeholder=" "
-              className="txt-2 "
-              type="text"
-              onChange={(e) => setSolanaAddress(e.target.value)}
-              value={solanaAddress}
-            />
-          </div>
-          {rewards ? (
-            <OverlayTrigger
-              placement="top"
-              overlay={
-                <Tooltip className="tooltip shadow">
-                  {parseFloat(rewards.toString()).toFixed(8)} ABB
-                </Tooltip>
-              }
-            >
-              <label className="txt-1 txt-center">
-                You will get{' '}
-                <span className="highlight u">
-                  {parseFloat(rewards.toString()).toFixed(3)} ABB
-                </span>
-              </label>
-            </OverlayTrigger>
-          ) : null}
-          {account ? (
-            <>
-              <a
-                className={`btn ${loadingState == 1 && 'loading'}`}
-                href="#"
-                onClick={() => performAction('stake')}
-              >
-                {loadingState == 1 ? (
-                  <PulseLoader
-                    color={'#fff'}
-                    loading={true}
-                    size={12}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                  />
-                ) : (
-                  <span>Approve & Stake ABB</span>
-                )}
-              </a>
-              <a
-                className={`btn ${loadingState == 2 && 'loading'}`}
-                href="#"
-                onClick={() => performAction('redeem')}
-              >
-                {loadingState == 2 ? (
-                  <PulseLoader
-                    color={'#fff'}
-                    loading={true}
-                    size={12}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                  />
-                ) : (
-                  <span>
-                    Redeem{' '}
-                    {account && userInfo
-                      ? `${numberWithCommas(
-                          parseFloat(userInfo.redeemableAmount).toFixed(2)
-                        )} ABB`
-                      : ''}{' '}
-                  </span>
-                )}
-              </a>
-            </>
-          ) : (
-            <a className="btn" href="#" onClick={connectWallet}>
-              <span>Connect Wallet</span>
-            </a>
-          )}
-        </div>
+        <div className="container"> </div>
       </div>
-      {/* )} */}
     </div>
   )
 }
