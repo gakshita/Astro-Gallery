@@ -246,7 +246,7 @@ const mint = () => {
         </div>
         <div className="flex-sb pd cw-1 rd m-auto shadow">
           <div>
-            <div className="txt-1 ">Current Staked</div>
+            <div className="txt-1 ">Currently Staked</div>
             <div className="txt-2 ">
               {account && userInfo
                 ? `${calc(parseFloat(userInfo.stakedAmount))} ABB`
