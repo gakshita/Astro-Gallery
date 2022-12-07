@@ -14,6 +14,7 @@ html {
   --shadow: rgba(0, 0, 0, 0.79);
   --aqua: #34ceb7;
   --magenta: #b44aee;
+  --magenta-light: #be80e0;
   --text-sizes-normal: 15px;
   --text-sizes-small: 12px;
   --grayBorder: #cecece;
@@ -371,7 +372,7 @@ h1 {
   color: var(--magenta);
 }
 .MuiTableHead-root .MuiTableRow-root {
-  background: var(--aqua);
+  background: var(--magenta-light);
 }
 
 .MuiTableHead-root .MuiTableCell-root {

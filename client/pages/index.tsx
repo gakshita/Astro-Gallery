@@ -156,9 +156,6 @@ const mint = () => {
       <div className="nav flex-sb shadow">
         <img src="https://astrogallery.io/fd0447e132932c75c366.png"></img>
         <div className="flex">
-          <a className="txt-center github flex" href="" target="_blank">
-            Github
-          </a>
           {!account ? (
             <a className="btn btn-3" href="#" onClick={connectWallet}>
               <span>Connect Wallet</span>
@@ -178,9 +175,6 @@ const mint = () => {
           <span>Stake ABB</span>
         </div>
         <div className="adjustable flex">
-          {/* {account && userInfo && (
-            <BasicTable data={userInfo.processesUserArray} />
-          )} */}
           <div className="cw-1 flex-col">
             <div className="flex-sb pd cw-1 rd m-auto shadow">
               <div>
@@ -374,6 +368,9 @@ const mint = () => {
               )}
             </div>
           </div>
+          {account && userInfo && (
+            <BasicTable data={userInfo.processesUserArray} />
+          )}
         </div>
         <div className="container"> </div>
       </div>
