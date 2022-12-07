@@ -8,6 +8,9 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import CountdownTimer from '../TimeRecord'
 
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
+
 function createData(
   name: string,
   calories: number,
@@ -56,6 +59,32 @@ export default function BasicTable({ data }) {
     else if (expiration < timestamp) return 'To be redeemed'
     else return <CountdownTimer targetDate={expiration} />
   }
+
+  const calculateUserRewardPerStaking = (
+    depositTimestamp: number,
+    lockupDays: number,
+    amount: any
+  ) => {
+    var currentTime = new Date().getTime() / 1e3
+    var currentDayCount = (currentTime - depositTimestamp) / (365 * 86400)
+    console.log({
+      amount,
+      depositTimestamp,
+      lockupDays,
+      currentTime,
+      currentDayCount,
+    })
+
+    var lockupDaysToAPY: any = {
+      30: 500,
+      60: 1000,
+      90: 1500,
+    }
+    let reward =
+      (lockupDaysToAPY[lockupDays] * parseFloat(amount) * currentDayCount) /
+      (365 * 1e4)
+    return reward
+  }
   console.log({ data })
   return (
     <TableContainer component={Paper}>
@@ -64,8 +93,9 @@ export default function BasicTable({ data }) {
           <TableRow>
             <TableCell>Deposit Date</TableCell>
             <TableCell align="right">Amount Staked</TableCell>
-            <TableCell align="right">Duration</TableCell>
-            <TableCell align="right">Status</TableCell>
+            <TableCell align="right">Accrued Reward</TableCell>
+            <TableCell align="right">Staking Duration</TableCell>
+            <TableCell align="right">Redemption Status </TableCell>
           </TableRow>
         </TableHead>
         {data.length > 0 ? (
@@ -80,6 +110,30 @@ export default function BasicTable({ data }) {
                     {getTime(row.depositTimestamp)}
                   </TableCell>
                   <TableCell align="right">{row.amount} ABB</TableCell>
+                  <TableCell align="right">
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={
+                        <Tooltip className="tooltip shadow">
+                          {calculateUserRewardPerStaking(
+                            row.depositTimestamp,
+                            row.lockUpPeriod,
+                            row.amount
+                          ).toFixed(8)}{' '}
+                          ABB
+                        </Tooltip>
+                      }
+                    >
+                      <span className="u">
+                        {calculateUserRewardPerStaking(
+                          row.depositTimestamp,
+                          row.lockUpPeriod,
+                          row.amount
+                        ).toFixed(2)}{' '}
+                        ABB
+                      </span>
+                    </OverlayTrigger>
+                  </TableCell>
                   <TableCell align="right">{row.lockUpPeriod} days</TableCell>
                   <TableCell align="right">
                     <div className={getStatusType(row)}>

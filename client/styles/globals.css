@@ -21,9 +21,11 @@ html {
   --white: #fff;
   --yellow: #fede00;
 }
-.main {
-  overflow-y: hidden;
-  height: 100vh;
+@media (min-width: 600px) {
+  .main {
+    overflow-y: hidden;
+    height: 100vh;
+  }
 }
 .head {
   font-size: 1.5rem;
@@ -364,7 +366,7 @@ h1 {
 }
 
 .not-redeemed {
-  color: var(--yellow);
+  color: var(--black-light);
   font-weight: 500;
 }
 
@@ -390,6 +392,7 @@ h1 {
 @media (max-width: 600px) {
   .adjustable {
     flex-direction: column;
+    max-height: fit-content;
   }
 }
 

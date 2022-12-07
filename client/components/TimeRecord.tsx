@@ -24,12 +24,7 @@ const ExpiredNotice = () => {
 const ShowCounter = ({ days, hours, minutes, seconds }) => {
   return (
     <div className="show-counter">
-      <a
-        href="https://tapasadhikary.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="countdown-link flex-end"
-      >
+      <a rel="noopener noreferrer" className="countdown-link flex-end">
         {days ? (
           <DateTimeDisplay value={days} type={'d'} isDanger={days <= 3} />
         ) : null}

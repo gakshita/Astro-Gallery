@@ -46,5 +46,5 @@ export const getUserStakedData = (userArray: any, extras: any) => {
     processesUserArray[n].hasClaimed = false
     n = processesUserArray[n].nextIndex
   }
-  return processesUserArray
+  return processesUserArray.reverse()
 }
