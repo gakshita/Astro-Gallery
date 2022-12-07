@@ -66,7 +66,7 @@ export default function BasicTable({ data }) {
     amount: any
   ) => {
     var currentTime = new Date().getTime() / 1e3
-    var currentDayCount = (currentTime - depositTimestamp) / (365 * 86400)
+    var currentDayCount = Math.floor((currentTime - depositTimestamp) / 86400)
     console.log({
       amount,
       depositTimestamp,
