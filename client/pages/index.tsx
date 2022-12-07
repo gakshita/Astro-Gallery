@@ -25,6 +25,8 @@ interface IUserInfo {
   redeemableAmount: string
   accruedAmount: string
   processesUserArray: any[]
+  claimedAmount: string
+  stakedAmount: string
 }
 
 const mint = () => {
@@ -58,7 +60,6 @@ const mint = () => {
           ) {
             return toast.error("You don't have enough tokens!")
           }
-          console.log('args', { stakingAmountWei, duration, solanaAddress })
           try {
             setLoadingState(1)
             if (
@@ -111,12 +112,44 @@ const mint = () => {
     )
     let processesUserArray = getUserStakedData(result[4], result[5])
     console.log({ processesUserArray })
+
+    const axios = require('axios')
+    const { utils, BigNumber } = require('ethers')
+    let claimedAmount
+    let stakedAmount
+    let response = await axios.post(
+      'https://api.thegraph.com/subgraphs/name/ummehanizaki10/staking-abb',
+      {
+        query:
+          'query UserStakingData($account: Bytes!) {\n  currentUserPositions(where: {id: $account}) {\n    claimedAmount\n    stakedAmount\n    id\n  }\n}',
+        variables: {
+          account: account,
+        },
+        operationName: 'UserStakingData',
+        extensions: {
+          headers: null,
+        },
+      },
+      {
+        headers: null,
+      }
+    )
+    response = response.data.data.currentUserPositions[0]
+      ? response.data.data.currentUserPositions[0]
+      : { claimedAmount: '0', stakedAmount: '0' }
+    claimedAmount = utils.formatEther(response.claimedAmount)
+    claimedAmount = (+claimedAmount).toFixed(3)
+    stakedAmount = utils.formatEther(response.stakedAmount)
+    stakedAmount = (+stakedAmount).toFixed(3)
+
     setUserInfo({
       balance,
       allowance,
       redeemableAmount,
       accruedAmount,
       processesUserArray,
+      claimedAmount,
+      stakedAmount,
     })
   }
 
@@ -215,38 +248,19 @@ const mint = () => {
             </div>
             <div className="flex-sb pd cw-1 rd m-auto shadow">
               <div>
-                <div className="txt-1 ">Available to stake</div>
+                <div className="txt-1 ">Currently Staked</div>
                 <div className="txt-2 ">
                   {account && userInfo
-                    ? `${calc(parseFloat(userInfo.balance))} ABB`
+                    ? `${calc(parseFloat(userInfo.stakedAmount))} ABB`
                     : '-'}
                 </div>
               </div>
               <div>
-                <div className="txt-1 ">Accrued Rewards</div>
+                <div className="txt-1 ">Total Redeemed</div>
                 <div className="txt-2 ">
-                  {account && userInfo ? (
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={
-                        <Tooltip className="tooltip shadow">
-                          {parseFloat(
-                            userInfo && userInfo.accruedAmount
-                          ).toFixed(8)}{' '}
-                          ABB
-                        </Tooltip>
-                      }
-                    >
-                      <span className="u">
-                        {numberWithCommas(
-                          parseFloat(userInfo.accruedAmount).toFixed(3)
-                        )}{' '}
-                        ABB
-                      </span>
-                    </OverlayTrigger>
-                  ) : (
-                    '-'
-                  )}
+                  {account && userInfo
+                    ? `${calc(parseFloat(userInfo.claimedAmount))} ABB`
+                    : '-'}
                 </div>
               </div>
             </div>
