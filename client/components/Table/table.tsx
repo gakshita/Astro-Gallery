@@ -11,22 +11,7 @@ import CountdownTimer from '../TimeRecord'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number
-) {
-  return { name, calories, fat, carbs }
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24),
-  createData('Ice cream sandwich', 237, 9.0, 37),
-  createData('Eclair', 262, 16.0, 24),
-  createData('Cupcake', 305, 3.7, 67),
-  createData('Gingerbread', 356, 16.0, 49),
-]
+const ONE_DAY = 86400
 
 export default function BasicTable({ data }) {
   const THREE_DAYS_IN_MS = 3 * 24 * 60 * 60 * 1000
@@ -41,20 +26,20 @@ export default function BasicTable({ data }) {
     console.log(d.toLocaleTimeString(), time)
     return date[1] + ' ' + date[2] + ', ' + time[0] + ':' + time[1]
   }
-  const getStatusType = (row) => {
+  const getStatusType = (row: any) => {
     const currentDate = new Date()
     const timestamp = currentDate.getTime()
-    const expiration = (row.depositTimestamp + row.lockUpPeriod * 86400) * 1000
-    console.log({ expiration, row, timestamp })
+    const expiration =
+      (row.depositTimestamp + row.lockUpPeriod * ONE_DAY) * 1000
     if (row.hasClaimed) return 'redeemed'
     else if (expiration < timestamp) return 'not-redeemed'
     else return 'timer'
   }
-  const getStatus = (row, key) => {
+  const getStatus = (row: any) => {
     const currentDate = new Date()
     const timestamp = currentDate.getTime()
-    const expiration = (row.depositTimestamp + row.lockUpPeriod * 86400) * 1000
-    console.log({ expiration, row })
+    const expiration =
+      (row.depositTimestamp + row.lockUpPeriod * ONE_DAY) * 1000
     if (row.hasClaimed) return 'Redeemed'
     else if (expiration < timestamp) return 'To be redeemed'
     else return <CountdownTimer targetDate={expiration} />
@@ -66,7 +51,7 @@ export default function BasicTable({ data }) {
     amount: any
   ) => {
     var currentTime = new Date().getTime() / 1e3
-    var currentDayCount = Math.floor((currentTime - depositTimestamp) / 86400)
+    var currentDayCount = Math.floor((currentTime - depositTimestamp) / ONE_DAY)
     console.log({
       amount,
       depositTimestamp,
@@ -74,7 +59,8 @@ export default function BasicTable({ data }) {
       currentTime,
       currentDayCount,
     })
-
+    currentDayCount =
+      currentDayCount > lockupDays ? lockupDays : currentDayCount
     var lockupDaysToAPY: any = {
       30: 500,
       60: 1000,
@@ -136,9 +122,7 @@ export default function BasicTable({ data }) {
                   </TableCell>
                   <TableCell align="right">{row.lockUpPeriod} days</TableCell>
                   <TableCell align="right">
-                    <div className={getStatusType(row)}>
-                      {getStatus(row, key)}
-                    </div>
+                    <div className={getStatusType(row)}>{getStatus(row)}</div>
                   </TableCell>
                 </TableRow>
               ))}
