@@ -203,10 +203,18 @@ const mint = () => {
       </div>
       <div className="container">
         {/* {account} */}
-        <div className="head">
-          <img src="/coin.png"></img>
-          <span>Stake ABB</span>
+        <div className="head-main">
+          <div className="head">
+            <img src="/coin.png"></img>
+            <span>Stake ABB</span>
+          </div>
+          <span className="txt-1 head-txt">
+            {' '}
+            Staking $ABB on BSC will earn you an early allocation of $ABB
+            launching through the bridge on Solana.
+          </span>
         </div>
+
         <div className="adjustable flex">
           <div className="cw-1 flex-col">
             <div className="flex-sb pd cw-1 rd m-auto shadow">
@@ -382,7 +390,7 @@ const mint = () => {
               )}
             </div>
           </div>
-          {account && userInfo && (
+          {account && userInfo && userInfo.processesUserArray.length > 0 && (
             <BasicTable data={userInfo.processesUserArray} />
           )}
         </div>
