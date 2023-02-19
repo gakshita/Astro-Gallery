@@ -8,17 +8,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Staking</title>
         <meta property="og:title" content="AstroGallery" key="title" />
-        <meta
-          property="og:image"
-          content="https://astrogallery.io/ICONO.png"
-          key="image"
-        />
+        <meta property="og:image" content="./coin.png" key="image" />
         <link rel="manifest" href="/site.webmanifest" />
-        <link
-          rel="icon"
-          href="https://astrogallery.io/ICONO.png"
-          color="#5bbad5"
-        />
+        <link rel="icon" href="./coin.png" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
         <meta property="og:description" key="description" content="" />

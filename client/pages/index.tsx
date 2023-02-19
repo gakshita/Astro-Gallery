@@ -187,7 +187,7 @@ const mint = () => {
     <div className="main">
       <ToastContainer />
       <div className="nav flex-sb shadow">
-        <img src="https://astrogallery.io/fd0447e132932c75c366.png"></img>
+        <img src="./logo_1.jpeg"></img>
         <div className="flex">
           {!account ? (
             <a className="btn btn-3" href="#" onClick={connectWallet}>
